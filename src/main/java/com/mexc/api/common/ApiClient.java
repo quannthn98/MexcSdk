@@ -24,13 +24,10 @@ public class ApiClient {
     }
 
     public OkHttpClient createOkHttpClient() {
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
                 .connectTimeout(45, TimeUnit.SECONDS)
                 .readTimeout(45, TimeUnit.SECONDS)
                 .writeTimeout(45, TimeUnit.SECONDS)
-                .addInterceptor(httpLoggingInterceptor)
                 .addInterceptor(new SignatureInterceptor(secretKey, accessKey))
                 .build();
     }
